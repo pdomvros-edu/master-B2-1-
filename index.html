@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Your Potential: Master the B2 Exam!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: red; /* Changed from dark blue to red for header */
+            --secondary-blue: #212f3d; /* Darker background for footer */
+            --accent-teal: #1abc9c; /* Engaging accent color */
+            --light-gray: #ecf0f1; /* Light background for body */
+            --text-dark: #34495e;
+            --text-light: #ecf0f1;
+            --card-bg: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 25px 20px;
+            text-align: center;
+            border-bottom-left-radius: var(--border-radius);
+            border-bottom-right-radius: var(--border-radius);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2em;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .header-credits {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 10px;
+            line-height: 1.4;
+        }
+        .header-credits p {
+            margin: 3px 0;
+            font-size: 0.9em;
+        }
+
+        .teacher-section {
+            text-align: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .teacher-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: top;
+            border: 5px solid var(--accent-teal);
+            box-shadow: var(--box-shadow);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .teacher-img:hover {
+            transform: scale(1.05);
+        }
+
+        .teacher-welcome {
+            font-size: 1.1em;
+            color: var(--primary-blue);
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: auto;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            width: 80%;
+            max-width: 500px;
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            position: relative;
+        }
+
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2em;
+            color: var(--primary-blue);
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--accent-teal);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .category-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .category-card .icon {
+            font-size: 3em;
+            color: var(--accent-teal);
+            margin-bottom: 15px;
+        }
+
+        .category-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6em;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .category-card p {
+            font-size: 0.95em;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .category-card ul li {
+            margin-bottom: 8px;
+        }
+
+        .category-card ul li a {
+            text-decoration: none;
+            color: var(--accent-teal);
+            font-weight: 600;
+            transition: color 0.2s ease;
+            display: block;
+            padding: 5px 0;
+            border-bottom: 1px dotted rgba(26, 188, 156, 0.4);
+        }
+
+        .category-card ul li a:hover {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+
+        .coming-soon {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 1em;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin: 50px 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent-teal);
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.3em;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #16a085;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background-color: var(--secondary-blue);
+            color: var(--text-light);
+            text-align: center;
+            padding: 25px 20px;
+            font-size: 0.9em;
+            border-top-left-radius: var(--border-radius);
+            border-top-right-radius: var(--border-radius);
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: var(--accent-teal);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--text-light);
+        }
+
+        .optional-section {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .optional-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .optional-section ul {
+            list-style: disc;
+            padding-left: 25px;
+        }
+
+        .optional-section p {
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            header p {
+                font-size: 0.9em;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .teacher-img {
+                width: 120px;
+                height: 120px;
+            }
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>Unlock Your Potential: Master the B2 Exam!</h1>
+            <p>Comprehensive Resources for B2 Exam Success</p>
+            <div class="header-credits">
+                <p>Designed by Panagiotis Domvros 2025 (CC BY-NC)</p>
+                <p>English Teacher – Teacher Trainer</p>
+                <p>Principal of 1st Middle School of Pylea</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="teacher-section">
+            <img src="teacher.png" alt="Your Personal B2 Exam Instructor" class="teacher-img" id="teacherImage">
+            <p class="teacher-welcome">Click on your guide to get a welcome message!</p>
+        </section>
+
+        <div id="welcomeModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal()">&times;</span>
+                <h3>Welcome to Your B2 Exam Journey!</h3>
+                <p>Hello future B2 achiever! I'm here to guide you through every step of your preparation. This hub is designed to provide you with all the essential tools and resources, from core grammar points to effective reading strategies and vocabulary-building exercises. Dive in, explore the sections, and let's ace the B2 exam together!</p>
+                <p>Best of luck, <br>Panagiotis Domvros <br> domvroshub@gmail.com</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Explore Your B2 Learning Path</h2>
+
+        <section class="content-grid">
+
+            <div class="category-card">
+                <div class="icon">📚</div>
+                <h3>Grammar & Syntax Mastery</h3>
+                <p>Strengthen your foundation with essential B2 grammar rules and sentence structures.</p>
+                <ul>
+                    <!-- Links will be added soon -->
+                </ul>
+                <div class="coming-soon"><em>(Comming Soon!)</em></div>
+            </div>
+
+            <div class="category-card">
+                <div class="icon">🔧</div>
+                <h3>Sentence Transformations</h3>
+                <p>Hone your paraphrasing and rephrasing skills tailored for the B2 exam.</p>
+                <ul>
+                    <!-- Links will be added soon -->
+                </ul>
+                <div class="coming-soon"><em>(Comming Soon!)</em></div>
+            </div>
+
+            <div class="category-card">
+                <div class="icon">👁️</div>
+                <h3>Reading Comprehension</h3>
+                <p>Practice strategies to tackle B2-level texts and improve critical reading.</p>
+                <ul>
+                    <!-- Links will be added soon -->
+                </ul>
+                <div class="coming-soon"><em>(Comming Soon!)</em></div>
+            </div>
+
+            <div class="category-card">
+                <div class="icon">🧩</div>
+                <h3>Vocabulary & Word Formation</h3>
+                <p>Boost your lexicon with targeted B2 vocabulary exercises.</p>
+                <ul>
+                    <li><a href="https://pdomvros-edu.github.io/B2-Vocab-Attack/" target="_blank">B2 Vocab Attack!</a></li>
+                </ul>
+                <div class="coming-soon"><em>(Comming Soon!)</em></div>
+            </div>
+            
+            <div class="category-card">
+                <div class="icon">✍️</div>
+                <h3>Writing</h3>
+                <p>Develop effective writing skills for B2 essays, emails, and reports.</p>
+                <ul>
+                    <!-- Links will be added soon -->
+                </ul>
+                <div class="coming-soon"><em>(Comming Soon!)</em></div>
+            </div>
+
+            <div class="category-card">
+                <div class="icon">🎧</div>
+                <h3>Listening & Speaking</h3>
+                <p>Improve your listening comprehension and prepare for the B2 speaking tasks.</p>
+                <ul>
+                    <!-- Links will be added soon -->
+                </ul>
+                <div class="coming-soon"><em>(Comming Soon!)</em></div>
+            </div>
+
+        </section>
+
+        <section class="optional-section">
+            <h3>Why B2 Level?</h3>
+            <p>Passing the B2 exam demonstrates an upper-intermediate command of English, which can help you:</p>
+            <ul>
+                <li><strong>Academic Pathways:</strong> Qualify for English-taught undergraduate programs and scholarships.</li>
+                <li><strong>Professional Growth:</strong> Enhance your CV and open up job opportunities requiring solid English skills.</li>
+                <li><strong>Everyday Confidence:</strong> Communicate effectively in travel, social, and informal work settings.</li>
+                <li><strong>Global Mobility:</strong> Show readiness for long-term stays in English-speaking countries.</li>
+            </ul>
+        </section>
+
+        <section class="cta-section">
+            <a href="#" class="cta-button" onclick="alert('Stay tuned! All B2 resources are coming soon. In the meantime, check out B2 Vocab Attack!')">Get Started on Your B2 Journey!</a>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Educational materials by Panagiotis Domvros. © 2025 All rights reserved.</p>
+            <p>For more information, feel free to <a href="mailto:domvroshub@gmail.com">contact us</a>.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("welcomeModal");
+
+        // Get the image that opens the modal
+        var img = document.getElementById("teacherImage");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close-button")[0];
+
+        // When the user clicks on the image, open the modal
+        img.onclick = function() {
+            modal.style.display = "flex"; /* Use flex to center content */
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal content, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Function to explicitly close modal
+        function closeModal() {
+            modal.style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
